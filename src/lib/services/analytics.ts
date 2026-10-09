@@ -12,7 +12,7 @@ import {
   DashboardData,
 } from '@/types/analytics';
 import { Order, SafeOrder, Kiosk, KioskSession } from '@/types/database';
-import { getDateRangeBounds, formatDateLabel } from '@/lib/utils/date-helpers';
+import { getDateRangeBounds, formatDateLabel, getISTHour, getISTDateKey } from '@/lib/utils/date-helpers';
 
 /**
  * Filter orders and sessions based on date range bounds
@@ -86,15 +86,15 @@ export function calculateDailyAnalytics(orders: Order[], startDate: string | nul
 
   // Build a calendar template if within 30 or 7 days range
   if (startDate && endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const cur = new Date(start);
-    cur.setHours(0, 0, 0, 0);
+    const startKey = getISTDateKey(startDate);
+    const endKey = getISTDateKey(endDate);
+    const cur = new Date(`${startKey}T12:00:00+05:30`);
+    const end = new Date(`${endKey}T12:00:00+05:30`);
 
     const maxLoops = 120;
     let loops = 0;
     while (cur <= end && loops < maxLoops) {
-      const key = cur.toISOString().split('T')[0];
+      const key = getISTDateKey(cur);
       dailyMap[key] = { orders: 0, revenue: 0, pages: 0 };
       cur.setDate(cur.getDate() + 1);
       loops++;
@@ -104,7 +104,7 @@ export function calculateDailyAnalytics(orders: Order[], startDate: string | nul
   // Populate actual data
   orders.forEach((o) => {
     if (!o.created_at) return;
-    const dateKey = o.created_at.split('T')[0];
+    const dateKey = getISTDateKey(o.created_at);
     if (!dailyMap[dateKey]) {
       dailyMap[dateKey] = { orders: 0, revenue: 0, pages: 0 };
     }
@@ -172,8 +172,8 @@ export function calculateKioskPerformance(kiosks: Kiosk[], orders: Order[]): Kio
 }
 
 /**
- * 4. Peak Hours (00:00 to 23:00)
- * Uses completed/paid orders
+ * 4. Peak Hours (00:00 to 23:00 IST)
+ * Uses completed/paid orders bucketed into Asia/Kolkata timezone
  */
 export function calculateHourlyAnalytics(orders: Order[]): HourlyVolumeItem[] {
   const hourlyMap: { [hour: number]: { orders: number; revenue: number } } = {};
@@ -189,7 +189,7 @@ export function calculateHourlyAnalytics(orders: Order[]): HourlyVolumeItem[] {
     if (!o.created_at) return;
     const date = new Date(o.created_at);
     if (isNaN(date.getTime())) return;
-    const hour = date.getHours();
+    const hour = getISTHour(date);
     hourlyMap[hour].orders += 1;
     hourlyMap[hour].revenue += Number(o.total_price) || 0;
   });

@@ -41,6 +41,7 @@ export function formatDateTime(isoString: string | null | undefined): string {
     const d = new Date(isoString);
     if (isNaN(d.getTime())) return '—';
     return new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
       month: 'short',
       day: 'numeric',
       year: 'numeric',

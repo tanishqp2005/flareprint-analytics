@@ -39,13 +39,13 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
         <div>
           <h3 className="text-base font-bold text-slate-900 tracking-tight">Hourly Demand Curve</h3>
           <p className="text-xs text-slate-500 mt-0.5">
-            24-hour chronological distribution of customer traffic and order fulfillment (00:00 – 23:00)
+            24-hour chronological distribution of customer traffic and order fulfillment (00:00 – 23:00 IST)
           </p>
         </div>
         {peakHourItem ? (
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-semibold text-orange-700 self-start sm:self-auto">
             <Clock className="w-3.5 h-3.5 text-orange-600" />
-            <span>Peak Window: <strong>{peakHourItem.hour}</strong> ({peakHourItem.orders} orders)</span>
+            <span>Peak Window: <strong>{peakHourItem.hour} IST</strong> ({peakHourItem.orders} orders)</span>
           </div>
         ) : (
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-xs font-medium text-slate-500 self-start sm:self-auto">
@@ -78,7 +78,7 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
                   return (
                     <div className="bg-slate-950 text-white p-3 rounded-xl shadow-xl text-xs space-y-1 border border-slate-800 min-w-32">
                       <p className="font-semibold text-slate-300 pb-1 border-b border-slate-800">
-                        Time: {item.hour}
+                        Time: {item.hour} IST
                       </p>
                       <div className="flex justify-between gap-4">
                         <span className="text-orange-400">Paid Jobs:</span>
