@@ -92,8 +92,8 @@ export default function LoginPage() {
 
   if (checkingInitialAuth) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4">
-        <div className="bg-white/10 p-3 rounded-2xl border border-white/10 mb-4">
+      <div className="min-h-screen bg-[#F7FAFC] flex flex-col items-center justify-center p-4">
+        <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm mb-4">
           <Image
             src="/flareprint-icon.png"
             alt="FlarePrint"
@@ -102,87 +102,76 @@ export default function LoginPage() {
             className="w-10 h-10 object-contain animate-pulse"
           />
         </div>
-        <div className="w-6 h-6 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Subtle brand ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
-        <div className="flex justify-center">
-          <div className="bg-white px-5 py-3 rounded-2xl shadow-xl shadow-slate-950/20 border border-slate-100 flex items-center justify-center">
-            <Image
-              src="/flareprint-logo.png"
-              alt="FlarePrint"
-              width={160}
-              height={48}
-              className="h-9 w-auto object-contain"
-              priority
-            />
-          </div>
+    <div className="min-h-screen bg-[#F7FAFC] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 text-center">
+        <div className="inline-flex items-center justify-center mb-4">
+          <Image
+            src="/flareprint-logo.png"
+            alt="FlarePrint"
+            width={180}
+            height={52}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </div>
-        <div className="mt-3.5 flex items-center justify-center gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30">
-            Admin Operations
-          </span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700 mb-2">
+          <Shield className="w-3.5 h-3.5 text-blue-600" />
+          <span>Admin Analytics Portal</span>
         </div>
-        <h2 className="mt-2 text-center text-xl font-bold tracking-tight text-white">
-          Operations Control Center
-        </h2>
-        <p className="mt-1 text-center text-xs text-slate-400">
-          Internal Fleet Management &amp; Financial Telemetry
+        <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+          FlarePrint Analytics
+        </h1>
+        <p className="mt-1 text-xs text-slate-500">
+          Sign in to access kiosk telemetry, revenue, and order logs
         </p>
       </div>
 
-      <div className="mt-7 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
-        <div className="bg-slate-900/90 backdrop-blur-md py-8 px-6 sm:px-8 shadow-2xl rounded-2xl border border-slate-800">
-          <div className="mb-6 flex items-center gap-2.5 p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-300 text-xs">
-            <Shield className="w-4 h-4 text-orange-400 flex-shrink-0" />
-            <span>Restricted Access: Authorized administrators only.</span>
-          </div>
-
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4 sm:px-0">
+        <div className="bg-white py-8 px-6 sm:px-8 shadow-sm rounded-2xl border border-slate-200">
           {error && (
-            <div className="mb-6 flex items-start gap-2.5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs">
-              <AlertCircle className="w-4 h-4 text-rose-400 flex-shrink-0 mt-0.5" />
+            <div className="mb-6 flex items-start gap-2.5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs">
+              <AlertCircle className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
               <div>{error}</div>
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Admin Email
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
                   placeholder="admin@sakec.ac.in"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-700/80 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-100 focus:border-blue-600 transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-700/80 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 transition-all"
+                  className="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-blue-100 focus:border-blue-600 transition-all"
                 />
               </div>
             </div>
@@ -190,17 +179,17 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 bg-orange-600 hover:bg-orange-500 text-white font-semibold rounded-lg text-xs shadow-md shadow-orange-950/30 transition-all disabled:opacity-50 cursor-pointer"
+              className="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
             >
               {loading ? (
                 <>
                   <div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Verifying Authorization...</span>
+                  <span>Signing in...</span>
                 </>
               ) : (
                 <>
-                  <span>Sign In to Command Center</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Sign In</span>
+                  <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>

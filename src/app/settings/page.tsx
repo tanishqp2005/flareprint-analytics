@@ -30,7 +30,7 @@ export default function SettingsPage() {
         <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-6">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-orange-50 border border-orange-100 text-orange-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
@@ -153,7 +153,7 @@ export default function SettingsPage() {
         {/* System Deployment Info */}
         <div className="bg-white rounded-xl border border-slate-200 shadow-2xs p-5">
           <div className="flex items-center gap-2 text-xs font-bold text-slate-900 mb-1">
-            <Server className="w-4 h-4 text-orange-600" />
+            <Server className="w-4 h-4 text-blue-600" />
             <span>FlarePrint Analytics — Operations Control Center</span>
           </div>
           <div className="text-xs text-slate-500">

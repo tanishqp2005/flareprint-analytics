@@ -5,11 +5,8 @@ import { AppLayout } from '@/components/layout/AppLayout';
 import { Header } from '@/components/layout/Header';
 import { OverviewKpiCards } from '@/components/dashboard/OverviewKpiCards';
 import { OrderDailyChart } from '@/components/dashboard/OrderDailyChart';
-import { KioskStatusSection } from '@/components/dashboard/KioskStatusSection';
-import { PeakHoursChart } from '@/components/dashboard/PeakHoursChart';
-import { PrintConfigSection } from '@/components/dashboard/PrintConfigSection';
-import { KioskPerformanceTable } from '@/components/dashboard/KioskPerformanceTable';
-import { RecentOrdersTable } from '@/components/orders/RecentOrdersTable';
+import { KioskSummarySection } from '@/components/dashboard/KioskSummarySection';
+import { RecentOrdersPreview } from '@/components/dashboard/RecentOrdersPreview';
 import { useDateFilter } from '@/context/DateFilterContext';
 import { DashboardData } from '@/types/analytics';
 import { authenticatedFetch } from '@/lib/api/client-fetch';
@@ -55,8 +52,8 @@ export default function OverviewPage() {
   return (
     <AppLayout>
       <Header
-        title="Operations Command Center"
-        description="Real-time financial yield, hardware network status, and operational throughput"
+        title="Global Business Overview"
+        description="Business-wide performance across all kiosks, network financial yield, and daily velocity"
         onRefresh={fetchOverviewData}
         isRefreshing={loading}
       />
@@ -78,7 +75,7 @@ export default function OverviewPage() {
           </div>
         )}
 
-        {/* 1. Overview Primary & Secondary KPI Cards */}
+        {/* 1. Global Business KPI Cards */}
         {data ? (
           <OverviewKpiCards metrics={data.overview} isLoading={loading} />
         ) : (
@@ -97,50 +94,20 @@ export default function OverviewPage() {
           />
         )}
 
-        {/* 2. Order Daily Chronological Chart */}
+        {/* 2. Chronological Revenue and Order Daily Velocity Chart */}
         <OrderDailyChart
           data={data?.dailyAnalytics || []}
           isLoading={loading}
         />
 
-        {/* 3. Operational Hardware Fleet Status */}
-        {data && (
-          <KioskStatusSection
-            summary={data.kioskStatusSummary}
-            kiosks={data.kioskPerformance}
-            isLoading={loading}
-          />
-        )}
-
-        {/* 4. Peak Hours & Print Config grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <PeakHoursChart
-            data={data?.peakHours || []}
-            isLoading={loading}
-          />
-          {data && (
-            <PrintConfigSection
-              metrics={data.printConfig}
-              isLoading={loading}
-            />
-          )}
-        </div>
-
-        {/* 5. Kiosk Performance Breakdown */}
-        {data && (
-          <KioskPerformanceTable
-            kiosks={data.kioskPerformance}
-            isLoading={loading}
-          />
-        )}
-
-        {/* 6. Recent Orders Activity Log */}
-        <RecentOrdersTable
-          kioskList={(data?.kioskPerformance || []).map((k) => ({
-            kiosk_code: k.kiosk_code,
-            display_name: k.display_name,
-          }))}
+        {/* 3. Kiosk Fleet Comparison Summary & Best-Performing Machine */}
+        <KioskSummarySection
+          kiosks={data?.kioskPerformance || []}
+          isLoading={loading}
         />
+
+        {/* 4. Compact Recent Orders Activity Preview with link to full Orders */}
+        <RecentOrdersPreview />
       </div>
     </AppLayout>
   );

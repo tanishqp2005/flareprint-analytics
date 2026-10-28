@@ -41,6 +41,48 @@ export type SafeOrder = {
   payment_status: string | null;
   status: string;
   created_at: string;
+  batch_id?: string | null;
+};
+
+/**
+ * Sanitized kiosk session representation returned by the analytics API.
+ * Never exposes session_token, file_path, or private payment identifiers.
+ */
+export type SafeKioskSession = {
+  id: string;
+  kiosk_id: string; // kiosk UUID
+  kiosk_code: string; // e.g. 'flareprint-003'
+  kiosk_name?: string; // e.g. 'Flareprint Sakec Library'
+  status: string; // 'completed' | 'cancelled' | 'expired' | 'active'
+  payment_status: string | null;
+  total_price: number;
+  page_count: number;
+  print_sides?: string | null;
+  file_name?: string | null;
+  created_at: string;
+  expires_at?: string | null;
+  completed_at?: string | null;
+};
+
+/**
+ * Unified reconciled log item combining public.orders and public.kiosk_sessions
+ */
+export type UnifiedJobLog = {
+  id: string;
+  source: 'order' | 'kiosk_session' | 'reconciled';
+  file_name: string;
+  kiosk_id: string | null; // e.g. 'flareprint-003' or null for Web Upload
+  kiosk_name?: string | null;
+  page_count: number;
+  copies: number;
+  color_print: boolean;
+  print_sides?: string | null;
+  total_price: number;
+  payment_status: string | null;
+  status: string;
+  created_at: string;
+  completed_at?: string | null;
+  batch_id?: string | null;
 };
 
 export type Kiosk = {

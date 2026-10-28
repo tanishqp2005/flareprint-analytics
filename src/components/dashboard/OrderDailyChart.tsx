@@ -25,8 +25,8 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
 
   if (isLoading) {
     return (
-      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-2xs h-84 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-7 w-7 border-2 border-orange-200 border-t-orange-600 mb-3" />
+      <div className="bg-white p-6 rounded-xl border border-slate-200/80 shadow-2xs h-80 flex flex-col items-center justify-center">
+        <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-200 border-t-blue-600 mb-2.5" />
         <p className="text-xs text-slate-500 font-medium">Loading daily analytics telemetry...</p>
       </div>
     );
@@ -34,7 +34,7 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
 
   if (!data || data.length === 0) {
     return (
-      <div className="bg-white p-8 rounded-xl border border-slate-200 shadow-2xs h-84 flex flex-col items-center justify-center text-center">
+      <div className="bg-white p-8 rounded-xl border border-slate-200/80 shadow-2xs h-80 flex flex-col items-center justify-center text-center">
         <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mb-2.5">
           <CalendarX className="w-5 h-5" />
         </div>
@@ -47,10 +47,10 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
   }
 
   return (
-    <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-2xs transition-all">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <div className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-2xs transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
         <div>
-          <h3 className="text-base font-bold text-slate-900 tracking-tight">Daily Operational Velocity</h3>
+          <h3 className="text-sm font-bold text-slate-900 tracking-tight">Daily Operational Velocity</h3>
           <p className="text-xs text-slate-500 mt-0.5">
             Chronological aggregation of order volume, revenue generated, and printed sheet counts
           </p>
@@ -61,7 +61,7 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
           <button
             type="button"
             onClick={() => setMetricTab('all')}
-            className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               metricTab === 'all'
                 ? 'bg-white text-slate-900 shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
@@ -72,7 +72,7 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
           <button
             type="button"
             onClick={() => setMetricTab('revenue')}
-            className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               metricTab === 'revenue'
                 ? 'bg-white text-emerald-700 shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
@@ -83,7 +83,7 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
           <button
             type="button"
             onClick={() => setMetricTab('orders')}
-            className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               metricTab === 'orders'
                 ? 'bg-white text-blue-700 shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
@@ -94,9 +94,9 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
           <button
             type="button"
             onClick={() => setMetricTab('pages')}
-            className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
+            className={`px-3 py-1 rounded-md transition-all cursor-pointer ${
               metricTab === 'pages'
-                ? 'bg-white text-orange-700 shadow-2xs font-semibold'
+                ? 'bg-white text-indigo-700 shadow-2xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -105,21 +105,21 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
         </div>
       </div>
 
-      <div className="h-72 w-full">
+      <div className="h-68 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
               <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#059669" stopOpacity={0.25} />
+                <stop offset="5%" stopColor="#059669" stopOpacity={0.2} />
                 <stop offset="95%" stopColor="#059669" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="colorOrders" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.25} />
+                <stop offset="5%" stopColor="#2563eb" stopOpacity={0.2} />
                 <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="colorPages" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ea580c" stopOpacity={0.25} />
-                <stop offset="95%" stopColor="#ea580c" stopOpacity={0} />
+                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.2} />
+                <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
               </linearGradient>
             </defs>
 
@@ -141,16 +141,16 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
               content={({ active, payload, label }) => {
                 if (active && payload && payload.length) {
                   return (
-                    <div className="bg-slate-950 text-white p-3 rounded-xl shadow-xl text-xs space-y-1.5 border border-slate-800 min-w-36">
-                      <p className="font-semibold text-slate-300 pb-1 border-b border-slate-800">
+                    <div className="bg-white text-slate-800 p-3 rounded-xl shadow-lg text-xs space-y-1.5 border border-slate-200/90 min-w-36">
+                      <p className="font-semibold text-slate-900 pb-1 border-b border-slate-100">
                         {label}
                       </p>
                       {payload.map((item, idx) => (
                         <div key={idx} className="flex items-center justify-between gap-4">
-                          <span className="capitalize text-slate-400">
+                          <span className="capitalize text-slate-500">
                             {item.name}:
                           </span>
-                          <span className="font-bold text-white">
+                          <span className="font-bold text-slate-900">
                             {item.name === 'Revenue'
                               ? formatCurrency(item.value as number)
                               : formatNumber(item.value as number)}
@@ -197,7 +197,7 @@ export function OrderDailyChart({ data, isLoading }: OrderDailyChartProps) {
                 type="monotone"
                 dataKey="pages"
                 name="Pages Printed"
-                stroke="#ea580c"
+                stroke="#6366f1"
                 strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#colorPages)"

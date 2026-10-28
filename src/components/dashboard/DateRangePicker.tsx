@@ -48,9 +48,9 @@ export function DateRangePicker() {
         type="button"
         id="date-range-selector"
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg shadow-2xs hover:bg-slate-50 hover:border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-orange-500/20 transition-all cursor-pointer"
+        className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg shadow-2xs hover:bg-slate-50 hover:border-slate-300 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
       >
-        <Calendar className="w-3.5 h-3.5 text-orange-600" />
+        <Calendar className="w-3.5 h-3.5 text-blue-600" />
         <span>{currentLabel}</span>
         <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
       </button>
@@ -71,13 +71,13 @@ export function DateRangePicker() {
                   onClick={() => handleSelect(preset.value)}
                   className={`w-full text-left px-3 py-1.5 text-xs flex items-center justify-between transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-orange-50 text-orange-700 font-semibold'
+                      ? 'bg-blue-50 text-blue-700 font-semibold'
                       : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
                   <span>{preset.label}</span>
                   {isSelected && (
-                    <Check className="w-3.5 h-3.5 text-orange-600" />
+                    <Check className="w-3.5 h-3.5 text-blue-600" />
                   )}
                 </button>
               );
@@ -88,7 +88,7 @@ export function DateRangePicker() {
 
       {showCustomModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 backdrop-blur-xs p-4">
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 w-full max-w-sm animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 w-full max-w-sm animate-in fade-in zoom-in-95 duration-150">
             <h3 className="text-sm font-bold text-slate-900 mb-1">Select Custom Date Range</h3>
             <p className="text-xs text-slate-500 mb-4">Specify start and end dates to filter analytics telemetry</p>
             
@@ -102,7 +102,7 @@ export function DateRangePicker() {
                   required
                   value={customStart}
                   onChange={(e) => setCustomStart(e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:outline-hidden"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-hidden"
                 />
               </div>
               <div>
@@ -114,7 +114,7 @@ export function DateRangePicker() {
                   required
                   value={customEnd}
                   onChange={(e) => setCustomEnd(e.target.value)}
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 focus:outline-hidden"
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-hidden"
                 />
               </div>
               <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
@@ -127,7 +127,7 @@ export function DateRangePicker() {
                 </button>
                 <button
                   type="submit"
-                  className="px-3.5 py-1.5 text-xs font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-lg shadow-xs transition-colors cursor-pointer"
+                  className="px-3.5 py-1.5 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs transition-colors cursor-pointer"
                 >
                   Apply Range
                 </button>

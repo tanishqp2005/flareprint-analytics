@@ -1,18 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #f7fafc;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --border: #e2e8f0;
-  --brand-orange: #ea580c;
-  --brand-orange-light: #fff7ed;
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --primary-blue-light: #eff6ff;
+  --brand-logo-blue: #0068c8;
+  --wordmark-blue: #1850a0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary-blue: var(--primary-blue);
+  --color-primary-blue-hover: var(--primary-blue-hover);
+  --color-primary-blue-light: var(--primary-blue-light);
+  --color-brand-logo: var(--brand-logo-blue);
+  --color-wordmark: var(--wordmark-blue);
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 }

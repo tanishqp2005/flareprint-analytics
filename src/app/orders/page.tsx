@@ -1,12 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Header } from '@/components/layout/Header';
 import { RecentOrdersTable } from '@/components/orders/RecentOrdersTable';
 import { createClient } from '@/lib/supabase/client';
 
-export default function OrdersPage() {
+function OrdersContent() {
+  const searchParams = useSearchParams();
+  const kioskParam = searchParams.get('kiosk') || 'all';
+  const statusParam = searchParams.get('status') || 'all';
+  const printStatusParam = searchParams.get('printStatus') || 'all';
+  const viewParam = (searchParams.get('view') || 'unified') as 'unified' | 'orders' | 'sessions';
+
   const [kiosks, setKiosks] = useState<{ kiosk_code: string; display_name: string }[]>([]);
 
   useEffect(() => {
@@ -28,15 +35,29 @@ export default function OrdersPage() {
   }, []);
 
   return (
+    <div className="p-6 max-w-7xl mx-auto space-y-6">
+      <RecentOrdersTable
+        kioskList={kiosks}
+        initialKioskCode={kioskParam}
+        initialPaymentStatus={statusParam}
+        initialPrintStatus={printStatusParam}
+        initialViewMode={viewParam}
+      />
+    </div>
+  );
+}
+
+export default function OrdersPage() {
+  return (
     <AppLayout>
       <Header
         title="Order Management & Logs"
         description="Real-time transactional audit log with kiosk attribution, payment verification, and fulfillment state"
       />
 
-      <div className="p-6 max-w-7xl mx-auto space-y-6">
-        <RecentOrdersTable kioskList={kiosks} />
-      </div>
+      <Suspense fallback={<div className="p-12 text-center text-slate-400 text-xs">Loading order audit log...</div>}>
+        <OrdersContent />
+      </Suspense>
     </AppLayout>
   );
 }

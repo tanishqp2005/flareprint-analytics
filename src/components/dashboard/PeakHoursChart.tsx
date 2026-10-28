@@ -23,7 +23,7 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
   if (isLoading) {
     return (
       <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-2xs h-80 flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-7 w-7 border-2 border-orange-200 border-t-orange-600 mb-3" />
+        <div className="animate-spin rounded-full h-7 w-7 border-2 border-blue-200 border-t-blue-600 mb-3" />
         <p className="text-xs text-slate-500 font-medium">Computing 24-hour peak pattern...</p>
       </div>
     );
@@ -43,8 +43,8 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
           </p>
         </div>
         {peakHourItem ? (
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs font-semibold text-orange-700 self-start sm:self-auto">
-            <Clock className="w-3.5 h-3.5 text-orange-600" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700 self-start sm:self-auto">
+            <Clock className="w-3.5 h-3.5 text-blue-600" />
             <span>Peak Window: <strong>{peakHourItem.hour} IST</strong> ({peakHourItem.orders} orders)</span>
           </div>
         ) : (
@@ -76,17 +76,17 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
                 if (active && payload && payload.length) {
                   const item = payload[0].payload as HourlyVolumeItem;
                   return (
-                    <div className="bg-slate-950 text-white p-3 rounded-xl shadow-xl text-xs space-y-1 border border-slate-800 min-w-32">
-                      <p className="font-semibold text-slate-300 pb-1 border-b border-slate-800">
+                    <div className="bg-white text-slate-900 p-3 rounded-xl shadow-lg border border-slate-200 text-xs space-y-1 min-w-32">
+                      <p className="font-semibold text-slate-800 pb-1 border-b border-slate-100">
                         Time: {item.hour} IST
                       </p>
                       <div className="flex justify-between gap-4">
-                        <span className="text-orange-400">Paid Jobs:</span>
-                        <span className="font-bold text-white">{formatNumber(item.orders)}</span>
+                        <span className="text-blue-600 font-medium">Paid Jobs:</span>
+                        <span className="font-bold text-slate-900">{formatNumber(item.orders)}</span>
                       </div>
                       <div className="flex justify-between gap-4">
-                        <span className="text-emerald-400">Revenue:</span>
-                        <span className="font-bold text-white">{formatCurrency(item.revenue)}</span>
+                        <span className="text-emerald-600 font-medium">Revenue:</span>
+                        <span className="font-bold text-slate-900">{formatCurrency(item.revenue)}</span>
                       </div>
                     </div>
                   );
@@ -97,7 +97,7 @@ export function PeakHoursChart({ data, isLoading }: PeakHoursChartProps) {
             <Bar
               dataKey="orders"
               name="Paid Orders"
-              fill="#ea580c"
+              fill="#2563EB"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

@@ -58,7 +58,7 @@ export function PrintConfigSection({ metrics, isLoading }: PrintConfigSectionPro
               />
               <div
                 style={{ width: `${colorPercent}%` }}
-                className="bg-orange-500 h-full transition-all duration-500"
+                className="bg-blue-600 h-full transition-all duration-500"
                 title={`Color: ${colorPercent}%`}
               />
             </div>
@@ -77,7 +77,7 @@ export function PrintConfigSection({ metrics, isLoading }: PrintConfigSectionPro
             </div>
 
             <div className="flex items-start gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-orange-500 mt-1 flex-shrink-0" />
+              <div className="w-2.5 h-2.5 rounded-full bg-blue-600 mt-1 flex-shrink-0" />
               <div>
                 <div className="text-[11px] text-slate-500 font-medium">Color Print</div>
                 <div className="text-base font-extrabold text-slate-900">

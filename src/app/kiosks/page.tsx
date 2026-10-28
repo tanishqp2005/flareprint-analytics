@@ -3,9 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Header } from '@/components/layout/Header';
-import { KioskStatusSection } from '@/components/dashboard/KioskStatusSection';
-import { KioskPerformanceTable } from '@/components/dashboard/KioskPerformanceTable';
-import { PrintDurationCard } from '@/components/dashboard/PrintDurationCard';
+import { KioskDirectory } from '@/components/kiosks/KioskDirectory';
 import { useDateFilter } from '@/context/DateFilterContext';
 import { DashboardData } from '@/types/analytics';
 import { authenticatedFetch } from '@/lib/api/client-fetch';
@@ -48,8 +46,8 @@ export default function KiosksPage() {
   return (
     <AppLayout>
       <Header
-        title="Kiosk Operations Center"
-        description="Physical node fleet health, dual-channel heartbeats, uptime telemetry, and throughput yield"
+        title="Kiosks Directory & Machine Comparison"
+        description="Centralized machine directory, dual-channel connectivity status, comparative financial yield, and deep-dive analytics"
         onRefresh={fetchKioskData}
         isRefreshing={loading}
       />
@@ -71,30 +69,12 @@ export default function KiosksPage() {
           </div>
         )}
 
-        {/* Operational Status Section */}
-        {data && (
-          <KioskStatusSection
-            summary={data.kioskStatusSummary}
-            kiosks={data.kioskPerformance}
-            isLoading={loading}
-          />
-        )}
-
-        {/* Kiosk Performance Table */}
-        {data && (
-          <KioskPerformanceTable
-            kiosks={data.kioskPerformance}
-            isLoading={loading}
-          />
-        )}
-
-        {/* Print Duration per Kiosk */}
-        {data && (
-          <PrintDurationCard
-            metrics={data.printDuration}
-            isLoading={loading}
-          />
-        )}
+        {/* Central Kiosk Directory and Comparison */}
+        <KioskDirectory
+          kiosks={data?.kioskPerformance || []}
+          summary={data?.kioskStatusSummary}
+          isLoading={loading}
+        />
       </div>
     </AppLayout>
   );

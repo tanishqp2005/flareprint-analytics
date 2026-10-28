@@ -89,7 +89,7 @@ export function KioskStatusSection({ summary, kiosks, isLoading }: KioskStatusSe
         <div>
           <div className="flex items-center gap-2">
             <h3 className="text-base font-bold text-slate-900 tracking-tight">Kiosk Operations Fleet</h3>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 border border-orange-200">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
               {summary.totalKiosks} Discovered
             </span>
           </div>
@@ -99,7 +99,7 @@ export function KioskStatusSection({ summary, kiosks, isLoading }: KioskStatusSe
         </div>
 
         <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200 self-start sm:self-auto">
-          <Cpu className="w-3.5 h-3.5 text-orange-600" />
+          <Cpu className="w-3.5 h-3.5 text-blue-600" />
           <span>Active Nodes: {summary.connectedHeartbeats} / {summary.totalKiosks}</span>
         </div>
       </div>
